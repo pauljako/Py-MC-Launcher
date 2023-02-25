@@ -1,6 +1,6 @@
 # Py-MC-Launcher
 A Minecraft Launcher in Python with PySimpleGUI and minecraft-launcher-lib
-Note: This Program is currently in beta
+<h6>Note: This Program is currently in beta</h6>
 
 # Install
 Currently you need to install it manually:
