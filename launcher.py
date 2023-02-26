@@ -28,6 +28,9 @@ def start_game(gf_version, forge, fabric, vanilla):
         version = gf_version
         minecraft_launcher_lib.install.install_minecraft_version(version, minecraft_directory)
     elif fabric:
+        print("Fabric is not supported")
+        sg.popup("Fabric is currently not supported!")
+        exit()
 
 
 
@@ -48,12 +51,12 @@ folders = ["minecraft", minecraft_launcher_lib.utils.get_minecraft_directory()]
 minecraft_directory = "minecraft"
 av_version = minecraft_launcher_lib.utils.get_installed_versions(minecraft_directory)
 print(av_version)
-
+df_folder = "minecraft"
 sg.theme("DarkPurple7")
 layout = [[sg.Text('Version:')],
-                 [sg.InputText()],
+                 [sg.InputText(default_text=minecraft_launcher_lib.utils.get_latest_version()["release"])],
                  [sg.Text("Minecraft Directory:")],
-                 [sg.Combo(folders, default_value="minecraft" )],
+                 [sg.Combo(folders, default_value=df_folder )],
                  [sg.Radio("Forge", "mdl", default=True), sg.Radio("Fabric", "mdl"), sg.Radio("Vanilla", "mdl")],
                  [sg.Button("Start"), sg.Button("Cancel")]]
 
@@ -70,6 +73,7 @@ while True:                             # The Event Loop
         window.hide()
         start_game(gm_version, values[2], values[3], values[4])
         break
+
 
 sg.popup("Minecraft Ended", auto_close=True, auto_close_duration=5)
 
