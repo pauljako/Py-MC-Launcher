@@ -4,7 +4,8 @@ import os
 import PySimpleGUI as sg
 import re
 
-def start_game(gf_version, forge, fabric, vanilla):
+
+def start_game(gf_version, forge, custom, vanilla):
     global minecraft_directory
 
     if forge:
@@ -27,10 +28,8 @@ def start_game(gf_version, forge, fabric, vanilla):
     elif vanilla:
         version = gf_version
         minecraft_launcher_lib.install.install_minecraft_version(version, minecraft_directory)
-    elif fabric:
-        print("Fabric is not supported")
-        sg.popup("Fabric is currently not supported!")
-        exit()
+    elif custom:
+        version = gf_version
 
 
 
@@ -51,13 +50,13 @@ folders = ["minecraft", minecraft_launcher_lib.utils.get_minecraft_directory()]
 minecraft_directory = "minecraft"
 av_version = minecraft_launcher_lib.utils.get_installed_versions(minecraft_directory)
 print(av_version)
-df_folder = "minecraft"
+df_folder = minecraft_launcher_lib.utils.get_minecraft_directory()
 sg.theme("DarkPurple7")
 layout = [[sg.Text('Version:')],
                  [sg.InputText(default_text=minecraft_launcher_lib.utils.get_latest_version()["release"])],
                  [sg.Text("Minecraft Directory:")],
-                 [sg.Combo(folders, default_value=df_folder )],
-                 [sg.Radio("Forge", "mdl", default=True), sg.Radio("Fabric", "mdl"), sg.Radio("Vanilla", "mdl")],
+                 [sg.Combo(folders, default_value=df_folder)],
+                 [sg.Radio("Forge", "mdl", default=True), sg.Radio("Custom", "mdl"), sg.Radio("Vanilla", "mdl")],
                  [sg.Button("Start"), sg.Button("Cancel")]]
 
 window = sg.Window('Minecraft Python Launcher', layout)
